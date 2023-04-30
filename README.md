@@ -13,4 +13,6 @@ Run these commands:
 
 `node app.js`
 
-or run by docker-compose
+or run by docker-compose 
+sudo apt-get install docker.io
+sudo apt-get install docker-compose
