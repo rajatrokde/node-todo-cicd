@@ -15,6 +15,6 @@ Run these commands:
 
 or run by docker-compose 
 
-sudo apt-get install docker.io
+sudo apt-get install docker.io -y
 
 sudo apt-get install docker-compose
