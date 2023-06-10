@@ -21,5 +21,5 @@ sudo apt-get install docker-compose -y
 
 # jenkins commands
 
-sudo apt-get install jenkins
+sudo apt-get install jenkins -y
 
