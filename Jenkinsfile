@@ -9,21 +9,26 @@ pipeline{
         }
         stage('Build and Test'){
             steps{
-                sh 'docker build . -t nahid0002/node-todo-app-cicd:latest'
+                sh "docker build . -t node-todo-app-cicd"
+
                 
             }
         }
-         stage('Login and Push image'){
-            steps{
+         stage("Push to Docker Hub"){
+               steps{
+                   
                 echo 'login into docker hub and pushing image....'
                 withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]){
+                     
+                     sh "docker tag node-todo-app-cicd ${env.dockerHubUser}/node-todo-app-cicd:latest"
                      sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                     sh 'docker push nahid0002/node-todo-app-cicd:latest'
-                }
-                
-            }
-        }
-        
+                     sh "docker push ${env.dockerHubUser}/node-todo-app-cicd:latest"
+
+
+               }
+           }
+         }
+           
         stage('Deploy'){
             steps{
                 echo "Deploying...."
@@ -32,6 +37,7 @@ pipeline{
         }
     }
 }
+
 
 
 
